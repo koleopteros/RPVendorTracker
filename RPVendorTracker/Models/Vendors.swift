@@ -16,10 +16,10 @@ class Vendors: ListInterface{
     var race: String = ""
     var age: Int = 0
     var gender: Bool = true
-    var inventory: Inventory?
+    var inventory: [Int:Int]?
     //imagefile currently unused
     var imageFile: String = ""
-    
+    init(){}
     init(id:Int,name:String,desc:String, weight:Float,race:String,age:Int,gender:Bool){
         self.id = id
         self.name=name
@@ -28,8 +28,9 @@ class Vendors: ListInterface{
         self.race=race
         self.age=age
         self.gender=gender
+        inventory = [:]
     }
-    init(id:Int,name:String,desc:String, weight:Float,race:String,age:Int,gender:Bool,inventory: Inventory){
+    init(id:Int,name:String,desc:String, weight:Float,race:String,age:Int,gender:Bool,inventory: [Int:Int]?){
         self.id = id
         self.name=name
         self.desc=desc
@@ -39,10 +40,18 @@ class Vendors: ListInterface{
         self.gender=gender
         self.inventory=inventory
     }
+    func updateItem(itemID:Int, quantity:Int){
+        inventory![itemID] = quantity
+    }
+    func incrementItem(itemID:Int){
+        inventory![itemID] = inventory![itemID]!+1
+    }
+    func decrementItem(itemID:Int){
+        inventory![itemID] = inventory![itemID]!-1
+    }
     func getName() -> String {
         return self.name
     }
-    
     func getDesc() -> String {
         return self.desc
     }

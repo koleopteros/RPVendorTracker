@@ -64,7 +64,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="b7R-Ty-ATf" kind="showDetail" id="uIK-GO-sUK"/>
+                                            <segue destination="b7R-Ty-ATf" kind="showDetail" identifier="mainToDetails" id="uIK-GO-sUK"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -87,20 +87,36 @@
             </objects>
             <point key="canvasLocation" x="1076" y="255.92203898050977"/>
         </scene>
-        <!--View Controller-->
+        <!--Details View Controller-->
         <scene sceneID="zBI-6W-YyN">
             <objects>
-                <viewController id="b7R-Ty-ATf" sceneMemberID="viewController">
+                <viewController id="b7R-Ty-ATf" customClass="DetailsViewController" customModule="RPVendorTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aMQ-Vi-Cbe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xUf-wd-naz">
+                                <rect key="frame" x="16" y="617" width="111" height="30"/>
+                                <state key="normal" title="back 2 the past!"/>
+                                <connections>
+                                    <segue destination="VG4-WF-bxe" kind="show" id="N2u-Mk-SbQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="xUf-wd-naz" firstAttribute="leading" secondItem="AJ2-Zf-tEC" secondAttribute="leading" constant="16" id="H0g-jV-uTe"/>
+                            <constraint firstItem="AJ2-Zf-tEC" firstAttribute="bottom" secondItem="xUf-wd-naz" secondAttribute="bottom" constant="20" id="g7L-CH-74k"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="AJ2-Zf-tEC"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gxb-jg-fuJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2058" y="56"/>
+            <point key="canvasLocation" x="2077.5999999999999" y="-107.49625187406298"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="N2u-Mk-SbQ"/>
+    </inferredMetricsTieBreakers>
 </document>

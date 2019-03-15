@@ -58,7 +58,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         segmentCtrl.selectedSegmentIndex = 0
         self.view.addSubview(segmentCtrl)
     }
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if segue.identifier == "mainToDetails" {
+            if let indexPath = ListView.indexPathForSelectedRow {
+                let destVC = segue.destination as! DetailsViewController
+                destVC.dataInterface = self.dataInterface[indexPath.item]
+            }
+        }
+    }
     @objc func indexChanged(_ sender: UISegmentedControl){
         switch sender.selectedSegmentIndex{
         case 1:
@@ -91,7 +98,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListItem", for: indexPath)
-        print("Data-type check: \n\tCurrent Segment: \(segmentNames[currentSegment]) \n\tActual Segment: \(dataInterface[0])")
+        print("Data-type check: \n\tCurrent Segment: \(segmentNames[currentSegment]) \n\tActual Segment: \(type(of:type(of:dataInterface[0])))")
         print("Attempting to fill indexpath #\(indexPath.item)")
         cell.textLabel?.text = dataInterface[indexPath.item].getName()
         cell.detailTextLabel?.text = dataInterface[indexPath.item].getCellDetail()

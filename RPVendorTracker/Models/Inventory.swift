@@ -9,7 +9,7 @@
 import Foundation
 
 class Inventory {
-    var owner: Vendors {
+    var owner: Int {
         get{ return self.owner }
         set(newOwner){ self.owner = newOwner }
     }
@@ -17,11 +17,25 @@ class Inventory {
         get{ return self.items }
         set(items){ self.items = items}
     }
-    init(vendor: Vendors, items:[Int: Int]){
-        owner = vendor
+    init(vendorID:Int){
+        owner = vendorID
+        self.items = [Int:Int]()
+    }
+    init(vendorID: Int, items:[Int: Int]){
+        owner = vendorID
         self.items = items
+    }
+    public func itemIncrement(itemID:Int){
+        items[itemID] = items[itemID]!+1
+    }
+    public func itemDecrement(itemID:Int){
+        items[itemID] = items[itemID]!-1
+    }
+    public func addItem(itemID:Int, newQuantity:Int){
+        items[itemID] = newQuantity
     }
     public func size() -> Int {
         return items.count
     }
+    
 }

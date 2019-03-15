@@ -16,7 +16,9 @@ class Items: ListInterface {
     var weight: Float = 0.0
     var rarity: Int = 0
     var category: Int = 0
-    
+    init(){
+        
+    }
     init(id: Int, name: String, desc: String, weight: Float, rarity: Int, category: Int){
         self.id=id
         self.name=name
