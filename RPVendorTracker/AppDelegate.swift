@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  RPVendorTracker
 //
-//  Created by user151744 on 3/13/19.
-//  Copyright © 2019 user151744. All rights reserved.
+//  Created by Jerome Ching on 2019-03-15.
+//  Copyright © 2019 Jerome Ching. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
     }
