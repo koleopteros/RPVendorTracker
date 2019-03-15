@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E81475D7223C15EF0031C38A /* Vendors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81475D6223C15EF0031C38A /* Vendors.swift */; };
+		E81475DA223C160D0031C38A /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81475D9223C160D0031C38A /* Items.swift */; };
+		E81475DC223C16230031C38A /* ListInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81475DB223C16230031C38A /* ListInterface.swift */; };
+		E81475DE223C1D4B0031C38A /* Inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81475DD223C1D4B0031C38A /* Inventory.swift */; };
 		E8504291223BFC30004C27BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8504290223BFC30004C27BF /* AppDelegate.swift */; };
 		E8504293223BFC30004C27BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8504292223BFC30004C27BF /* ViewController.swift */; };
 		E8504296223BFC30004C27BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8504294223BFC30004C27BF /* Main.storyboard */; };
@@ -36,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E81475D6223C15EF0031C38A /* Vendors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vendors.swift; sourceTree = "<group>"; };
+		E81475D9223C160D0031C38A /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
+		E81475DB223C16230031C38A /* ListInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInterface.swift; sourceTree = "<group>"; };
+		E81475DD223C1D4B0031C38A /* Inventory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inventory.swift; sourceTree = "<group>"; };
 		E850428D223BFC30004C27BF /* RPVendorTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RPVendorTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8504290223BFC30004C27BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8504292223BFC30004C27BF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +86,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E81475D8223C15F50031C38A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E81475DB223C16230031C38A /* ListInterface.swift */,
+				E81475D9223C160D0031C38A /* Items.swift */,
+				E81475D6223C15EF0031C38A /* Vendors.swift */,
+				E81475DD223C1D4B0031C38A /* Inventory.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E81475DF223C33FE0031C38A /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				E8EA3DA4223C07E000C55FCA /* CustomListCell.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		E8504284223BFC30004C27BF = {
 			isa = PBXGroup;
 			children = (
@@ -101,10 +128,11 @@
 		E850428F223BFC30004C27BF /* RPVendorTracker */ = {
 			isa = PBXGroup;
 			children = (
+				E81475DF223C33FE0031C38A /* CustomViews */,
+				E81475D8223C15F50031C38A /* Models */,
 				E8EA3DA6223C0ABB00C55FCA /* Controllers */,
 				E8504290223BFC30004C27BF /* AppDelegate.swift */,
 				E8504294223BFC30004C27BF /* Main.storyboard */,
-				E8EA3DA4223C07E000C55FCA /* CustomListCell.swift */,
 				E8504297223BFC32004C27BF /* Assets.xcassets */,
 				E8504299223BFC32004C27BF /* LaunchScreen.storyboard */,
 				E850429C223BFC32004C27BF /* Info.plist */,
@@ -270,9 +298,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E81475DE223C1D4B0031C38A /* Inventory.swift in Sources */,
+				E81475DC223C16230031C38A /* ListInterface.swift in Sources */,
+				E81475D7223C15EF0031C38A /* Vendors.swift in Sources */,
 				E85042BF223BFCEE004C27BF /* LoginViewController.swift in Sources */,
 				E8504293223BFC30004C27BF /* ViewController.swift in Sources */,
 				E8EA3DA5223C07E000C55FCA /* CustomListCell.swift in Sources */,
+				E81475DA223C160D0031C38A /* Items.swift in Sources */,
 				E8504291223BFC30004C27BF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

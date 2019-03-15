@@ -1,4 +1,4 @@
-//
+//CURRENTLY UNUSED... IN DEVELOPMENT
 //  CustomListCell.swift
 //  RPVendorTracker
 //
