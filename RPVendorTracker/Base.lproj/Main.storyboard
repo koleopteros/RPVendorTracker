@@ -109,6 +109,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3V-PR-h0a">
                                 <rect key="frame" x="329" y="617" width="30" height="30"/>
                                 <state key="normal" title="Add"/>
+                                <connections>
+                                    <segue destination="VG4-WF-bxe" kind="show" identifier="AddNewData" id="vTs-zN-tVk"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="b7h-FA-myH">
                                 <rect key="frame" x="10" y="50" width="355" height="557"/>
@@ -223,6 +226,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pu1-O0-g8O">
                                 <rect key="frame" x="16" y="617" width="48" height="30"/>
                                 <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <segue destination="VG4-WF-bxe" kind="show" id="HS9-zv-RL8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -273,6 +279,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="N2u-Mk-SbQ"/>
+        <segue reference="vTs-zN-tVk"/>
     </inferredMetricsTieBreakers>
 </document>
