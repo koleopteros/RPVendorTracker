@@ -14,4 +14,5 @@ protocol ListInterface {
     func getWeight() -> Float
     func getCellDetail() -> String
     func getCellImg() -> String
+    func dataDump() -> [String:Any]
 }

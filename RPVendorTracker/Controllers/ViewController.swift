@@ -18,21 +18,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var myVendorsDummyData: [Vendors] = []
     var dataInterface: [ListInterface] = []
     
+    @IBOutlet weak var addButton: UIButton!
+    
     var currentSegment: Int = 0
     
     let segmentNames = ["Vendors","Items","My Vendors"]
-    let addNewButton: UIButton = {
-        let button = UIButton(frame:CGRect.init(
-            x:UIScreen.main.bounds.width*0.2,
-            y:UIScreen.main.bounds.height-55,
-            width:UIScreen.main.bounds.width*0.6,
-            height:CGFloat(45)
-        ))
-        button.backgroundColor=UIColor.lightGray
-        button.setTitle("Add", for: UIControlState.normal)
-        
-        return button
-    }()
+    
     override func viewDidLoad() {
         //filling Dummy data, set default list to vendors
         self.fillDummyData()
@@ -43,8 +34,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         ListView.delegate = self
         ListView.dataSource = self
         
-        //create Add Button
-        self.view.addSubview(addNewButton)
         /* Segment control section */
         let segmentCtrl = UISegmentedControl(items:segmentNames)
         segmentCtrl.frame = CGRect(
@@ -65,6 +54,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 destVC.dataInterface = self.dataInterface[indexPath.item]
             }
         }
+        if segue.identifier == "MainToNewObjSegue" {
+            let destVC = segue.destination as! FormViewController
+            destVC.mode = self.currentSegment
+        }
     }
     @objc func indexChanged(_ sender: UISegmentedControl){
         switch sender.selectedSegmentIndex{
@@ -73,19 +66,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             dataInterface = itemsDummyData
             print(segmentNames[1]+" data count: "+String(getDataCount()))
             self.ListView.reloadData()
-            print()
+            updateAddButton()
             break
         case 2:
             currentSegment = 2
             dataInterface = myVendorsDummyData
             print(segmentNames[2]+" data count: "+String(getDataCount()))
             self.ListView.reloadData()
+            updateAddButton()
             break
         default:
             currentSegment = 0
             dataInterface = vendorDummyData
             print(segmentNames[0]+" data count: "+String(getDataCount()))
             self.ListView.reloadData()
+            updateAddButton()
         }
     }
     override func didReceiveMemoryWarning() {
@@ -113,6 +108,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return myVendorsDummyData.count
         default:
             return vendorDummyData.count
+        }
+    }
+    
+    func updateAddButton(){
+        if currentSegment == 2 {
+            addButton.titleLabel!.text = "Add New Item"
+        }else{
+            addButton.titleLabel!.text = "Add New Vendor"
         }
     }
     

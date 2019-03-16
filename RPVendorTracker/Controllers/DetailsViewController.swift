@@ -8,28 +8,46 @@
 
 import UIKit
 
-class DetailsViewController: UIViewController {
-    var dataInterface: ListInterface?
-    var dataStandard:[ListInterface]=[]
+class DetailsViewController: UIViewController{
+    let WIDTH = CGFloat(200.0)
+    let HEIGHT = CGFloat(30.0)
+    let CATEGORIES = ["Food","Tools","Weapons"]
+    let RARITY = ["1*","2*","3*","4*"]
     
-    var nameText: String?
-    // MARK: - IBOutlets
+    // Vars for Passed Data
+    var dataInterface: ListInterface?
+    var dataStandard:[ListInterface]=[Vendors(), Items()]
+    var vendorData: Vendors?
+    var itemsData: Items?
+    var dataType = -1
+    
+    var mainStackView: UIStackView = UIStackView()
+    var innerStackView: UIStackView = UIStackView()
+    var innerLabelStacks: UIStackView = UIStackView()
+    var innerTextFieldStacks: UIStackView = UIStackView()
+    var innerMidStack: UIStackView = UIStackView()
+    
+    var txtViewDescription:UITextView = UITextView()
     
     // MARK: - View LifeCycle
 
-    override func viewWillAppear(_ animated: Bool){
-        //creating empty
-        dataStandard.append(Vendors())
-        dataStandard.append(Items())
-        super.viewWillAppear(animated)
-        if let dataInterface = dataInterface {
-            
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if let dataInterface = dataInterface {
+            //test for Vendor type
+            if type(of:dataInterface) != type(of:dataStandard[0]){
+                dataType = 1
+                itemsData = Items(obj: dataInterface.dataDump())
+            } else {
+                dataType = 0
+                vendorData = Vendors(obj: dataInterface.dataDump())
+            }
+        }
+        print(dataType)
+        self.autolayoutMainStackView()
+        self.autolayoutStackView()
+        self.autolayoutTextViewDescription()
         // Do any additional setup after loading the view.
     }
 
@@ -37,8 +55,6 @@ class DetailsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
     /*
     // MARK: - Navigation
 
@@ -48,5 +64,115 @@ class DetailsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    private func autolayoutMainStackView(){
+        view.addSubview(mainStackView)
+        mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        mainStackView.leadingAnchor.constraint(equalTo:view.leadingAnchor, constant:10).isActive=true
+        mainStackView.trailingAnchor.constraint(equalTo:view.trailingAnchor, constant:-10).isActive=true
+        mainStackView.topAnchor.constraint(equalTo:view.topAnchor,constant:30).isActive=true
+        mainStackView.bottomAnchor.constraint(equalTo:view.bottomAnchor, constant:-60).isActive=true
+        
+        mainStackView.axis = .vertical
+        mainStackView.alignment = .fill
+        mainStackView.distribution = .fill
+        mainStackView.spacing = 10
+    }
+    private func autolayoutStackView(){
+        mainStackView.addArrangedSubview(innerStackView)
+        innerStackView.translatesAutoresizingMaskIntoConstraints = false
+        innerStackView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        innerStackView.axis = .horizontal
+        innerStackView.alignment = .fill
+        innerStackView.distribution = .fill
+        innerStackView.spacing = 10
+        
+        innerLabelStacks.translatesAutoresizingMaskIntoConstraints = false
+        innerStackView.addArrangedSubview(innerLabelStacks)
+        innerLabelStacks.axis = .vertical
+        innerLabelStacks.alignment = .leading
+        innerLabelStacks.distribution = .fillEqually
+        innerLabelStacks.spacing = 10
+        
+        //Setting up Labels for top section
+        
+        let lblName = UILabel()
+        lblName.translatesAutoresizingMaskIntoConstraints = false
+        lblName.text = "Name"
+        innerLabelStacks.addArrangedSubview(lblName)
+        let lblDetail1 = UILabel()
+        lblDetail1.translatesAutoresizingMaskIntoConstraints = false
+        lblDetail1.text = dataType == 0 ? "Age/Sex/Race" : "Rarity/Cat."
+        innerLabelStacks.addArrangedSubview(lblDetail1)
+        let lblDetail2 = UILabel()
+        lblDetail2.translatesAutoresizingMaskIntoConstraints = false
+        lblDetail2.text = "Weight"
+        innerLabelStacks.addArrangedSubview(lblDetail2)
+        
+        // MARK: Inserting Text fields
+        innerTextFieldStacks.translatesAutoresizingMaskIntoConstraints = false
+        innerStackView.addArrangedSubview(innerTextFieldStacks)
+        innerTextFieldStacks.axis = .vertical
+        innerTextFieldStacks.alignment = .fill
+        innerTextFieldStacks.distribution = .equalSpacing
+        innerTextFieldStacks.spacing = 0
+        
+        let txtName = UITextField()
+        txtName.translatesAutoresizingMaskIntoConstraints = false
+        txtName.text = dataInterface?.getName()
+        innerTextFieldStacks.addArrangedSubview(txtName)
+        
+        innerMidStack.translatesAutoresizingMaskIntoConstraints = false
+        innerTextFieldStacks.addArrangedSubview(innerMidStack)
+        innerMidStack.axis = .horizontal
+        innerMidStack.alignment = .fill
+        innerMidStack.distribution = .equalSpacing
+        innerMidStack.spacing = 0
+        
+        if dataType == 0 {
+            let txtAge = UITextField()
+            txtAge.translatesAutoresizingMaskIntoConstraints = false
+            txtAge.text = String(vendorData!.age)
+            innerMidStack.addArrangedSubview(txtAge)
+            let txtSex = UITextField()
+            txtSex.translatesAutoresizingMaskIntoConstraints = false
+            txtSex.text = (vendorData!.gender) ? "Male" : "FEMALE"
+            innerMidStack.addArrangedSubview(txtSex)
+            let txtRace = UITextField()
+            txtRace.translatesAutoresizingMaskIntoConstraints = false
+            txtRace.text = vendorData?.race
+            innerMidStack.addArrangedSubview(txtRace)
+        } else {
+            let txtRarity = UITextField()
+            txtRarity.translatesAutoresizingMaskIntoConstraints = false
+            txtRarity.text = RARITY[itemsData!.rarity]
+            innerMidStack.addArrangedSubview(txtRarity)
+            let txtCate = UITextField()
+            txtCate.translatesAutoresizingMaskIntoConstraints = false
+            txtCate.text = CATEGORIES[(itemsData?.category)!]
+            innerMidStack.addArrangedSubview(txtCate)
+        }
+        let txtWeight = UITextField()
+        txtWeight.translatesAutoresizingMaskIntoConstraints = false
+        txtWeight.text = String(dataInterface!.getWeight())
+        innerTextFieldStacks.addArrangedSubview(txtWeight)
+        
+    }
+    private func autolayoutTextViewDescription(){
+        let lblDesc = UILabel()
+        lblDesc.translatesAutoresizingMaskIntoConstraints = false
+        lblDesc.text = "Description:"
+        mainStackView.addArrangedSubview(lblDesc)
+        
+        mainStackView.addArrangedSubview(txtViewDescription)
+        txtViewDescription.text = dataInterface!.getDesc()
+        txtViewDescription.font = txtViewDescription.font?.withSize(14)
+        txtViewDescription.backgroundColor = UIColor(red: 220/255, green: 252/255, blue: 209/255, alpha: 1.0)
+        txtViewDescription.translatesAutoresizingMaskIntoConstraints = false
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        mainStackView.changeBackgroundColor(color: UIColor(red: 244/255, green: 204/255, blue: 195/255, alpha: 1.0))
+        innerStackView.changeBackgroundColor(color: UIColor(red: 191/255, green: 235/255, blue: 242/255, alpha: 1.0))
+    }
 }
