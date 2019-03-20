@@ -194,10 +194,11 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for:indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for:indexPath) as! InventoryItemCell
         let vendorInvKeys = vendorData?.inventory!.keys.sorted(by: <)
         let currentItem = itemsDummyData![vendorInvKeys![indexPath.row]]
-        cell.textLabel?.text = currentItem.getName()
+        cell.item = currentItem
+        cell.itemCount = vendorData?.inventory![vendorInvKeys![indexPath.row]]
         return cell
     }
     
