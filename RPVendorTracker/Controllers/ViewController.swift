@@ -1,4 +1,4 @@
-//
+//  Student ID: 100530184
 //  ViewController.swift
 //  RPVendorTracker
 //
@@ -52,6 +52,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if let indexPath = ListView.indexPathForSelectedRow {
                 let destVC = segue.destination as! DetailsViewController
                 destVC.dataInterface = self.dataInterface[indexPath.item]
+                destVC.itemsDummyData = self.itemsDummyData
             }
         }
         if segue.identifier == "MainToNewObjSegue" {

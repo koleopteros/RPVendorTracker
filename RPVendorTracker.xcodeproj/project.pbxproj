@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E80C68602242F5F7000871F0 /* InventoryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80C685F2242F5F7000871F0 /* InventoryItemCell.swift */; };
 		E81475D7223C15EF0031C38A /* Vendors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81475D6223C15EF0031C38A /* Vendors.swift */; };
 		E81475DA223C160D0031C38A /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81475D9223C160D0031C38A /* Items.swift */; };
 		E81475DC223C16230031C38A /* ListInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81475DB223C16230031C38A /* ListInterface.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E80C685F2242F5F7000871F0 /* InventoryItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItemCell.swift; sourceTree = "<group>"; };
 		E81475D6223C15EF0031C38A /* Vendors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vendors.swift; sourceTree = "<group>"; };
 		E81475D9223C160D0031C38A /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		E81475DB223C16230031C38A /* ListInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInterface.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			children = (
 				E81475E2223C628F0031C38A /* UIStackView.swift */,
 				E8EA3DA4223C07E000C55FCA /* CustomListCell.swift */,
+				E80C685F2242F5F7000871F0 /* InventoryItemCell.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				E81475E1223C3EE90031C38A /* DetailsViewController.swift in Sources */,
 				E81475D7223C15EF0031C38A /* Vendors.swift in Sources */,
 				E85042BF223BFCEE004C27BF /* LoginViewController.swift in Sources */,
+				E80C68602242F5F7000871F0 /* InventoryItemCell.swift in Sources */,
 				E8504293223BFC30004C27BF /* ViewController.swift in Sources */,
 				E8EA3DA5223C07E000C55FCA /* CustomListCell.swift in Sources */,
 				E81475DA223C160D0031C38A /* Items.swift in Sources */,
@@ -486,14 +490,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q7MP6MKJG8;
 				INFOPLIST_FILE = RPVendorTracker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = gbc.RPVendorTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -503,14 +511,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q7MP6MKJG8;
 				INFOPLIST_FILE = RPVendorTracker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = gbc.RPVendorTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
