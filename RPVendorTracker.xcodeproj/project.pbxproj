@@ -22,6 +22,7 @@
 		E85042A6223BFC32004C27BF /* RPVendorTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85042A5223BFC32004C27BF /* RPVendorTrackerTests.swift */; };
 		E85042B1223BFC32004C27BF /* RPVendorTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85042B0223BFC32004C27BF /* RPVendorTrackerUITests.swift */; };
 		E85042BF223BFCEE004C27BF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85042BE223BFCEE004C27BF /* LoginViewController.swift */; };
+		E8B558EC2244210E00999B41 /* AddObjViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B558EB2244210E00999B41 /* AddObjViewController.swift */; };
 		E8EA3DA5223C07E000C55FCA /* CustomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EA3DA4223C07E000C55FCA /* CustomListCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		E85042B0223BFC32004C27BF /* RPVendorTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPVendorTrackerUITests.swift; sourceTree = "<group>"; };
 		E85042B2223BFC32004C27BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E85042BE223BFCEE004C27BF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E8B558EB2244210E00999B41 /* AddObjViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddObjViewController.swift; sourceTree = "<group>"; };
 		E8EA3DA4223C07E000C55FCA /* CustomListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,6 +174,7 @@
 				E81475E4223C7C370031C38A /* FormViewController.swift */,
 				E81475E0223C3EE90031C38A /* DetailsViewController.swift */,
 				E85042BE223BFCEE004C27BF /* LoginViewController.swift */,
+				E8B558EB2244210E00999B41 /* AddObjViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				E81475E3223C628F0031C38A /* UIStackView.swift in Sources */,
 				E81475E1223C3EE90031C38A /* DetailsViewController.swift in Sources */,
 				E81475D7223C15EF0031C38A /* Vendors.swift in Sources */,
+				E8B558EC2244210E00999B41 /* AddObjViewController.swift in Sources */,
 				E85042BF223BFCEE004C27BF /* LoginViewController.swift in Sources */,
 				E80C68602242F5F7000871F0 /* InventoryItemCell.swift in Sources */,
 				E8504293223BFC30004C27BF /* ViewController.swift in Sources */,

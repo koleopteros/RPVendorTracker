@@ -11,8 +11,8 @@ import UIKit
 class DetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     let WIDTH = CGFloat(200.0)
     let HEIGHT = CGFloat(30.0)
-    let CATEGORIES = ["Food","Tools","Weapons"]
-    let RARITY = ["1*","2*","3*","4*"]
+    let CATEGORIES = ["Food","Tools","Weapons","Junk"]
+
     // for ReusableTableCell
     var cellId = "itemCell"
     
@@ -58,6 +58,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         if(dataType==0){
             self.autolayoutInventoryView()
         }
+        print(vendorData?.inventory)
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,7 +84,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         mainStackView.axis = .vertical
         mainStackView.alignment = .fill
-        mainStackView.distribution = .fillEqually
+        mainStackView.distribution = .fill
         mainStackView.spacing = 10
     }
     private func autolayoutStackView(){
@@ -98,6 +99,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         innerLabelStacks.translatesAutoresizingMaskIntoConstraints = false
         innerStackView.addArrangedSubview(innerLabelStacks)
+        innerLabelStacks.sizeToFit()
         innerLabelStacks.axis = .vertical
         innerLabelStacks.alignment = .leading
         innerLabelStacks.distribution = .fillEqually
@@ -141,11 +143,11 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         if dataType == 0 {
             let txtAge = UILabel()
             txtAge.translatesAutoresizingMaskIntoConstraints = false
-            txtAge.text = String(vendorData!.age)
+            txtAge.text = String(vendorData!.age)+","
             innerMidStack.addArrangedSubview(txtAge)
             let txtSex = UILabel()
             txtSex.translatesAutoresizingMaskIntoConstraints = false
-            txtSex.text = (vendorData!.gender) ? "Male" : "FEMALE"
+            txtSex.text = (vendorData!.gender) ? "Male," : "FEMALE,"
             innerMidStack.addArrangedSubview(txtSex)
             let txtRace = UILabel()
             txtRace.translatesAutoresizingMaskIntoConstraints = false
@@ -154,7 +156,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         } else {
             let txtRarity = UILabel()
             txtRarity.translatesAutoresizingMaskIntoConstraints = false
-            txtRarity.text = RARITY[itemsData!.rarity]
+            txtRarity.text = String(itemsData!.rarity)+"*"
             innerMidStack.addArrangedSubview(txtRarity)
             let txtCate = UILabel()
             txtCate.translatesAutoresizingMaskIntoConstraints = false
@@ -163,14 +165,13 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         let txtWeight = UILabel()
         txtWeight.translatesAutoresizingMaskIntoConstraints = false
-        txtWeight.text = String(dataInterface!.getWeight())
+        txtWeight.text = String(dataInterface!.getWeight())+" lbs"
         innerTextFieldStacks.addArrangedSubview(txtWeight)
-        
     }
     private func autolayoutTextViewDescription(){
         innerDescStack.axis = .vertical
         innerDescStack.alignment = .fill
-        innerDescStack.distribution = .fill
+        innerDescStack.distribution = .fillProportionally
         innerDescStack.spacing = 10
         mainStackView.addArrangedSubview(innerDescStack)
         
@@ -181,13 +182,20 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         innerDescStack.addArrangedSubview(txtViewDescription)
         txtViewDescription.text = dataInterface!.getDesc()
+        txtViewDescription.numberOfLines = 15
+        txtViewDescription.lineBreakMode = .byWordWrapping
         txtViewDescription.font = txtViewDescription.font?.withSize(14)
         txtViewDescription.backgroundColor = UIColor(red: 220/255, green: 252/255, blue: 209/255, alpha: 1.0)
         txtViewDescription.translatesAutoresizingMaskIntoConstraints = false
     }
     private func autolayoutInventoryView(){
+
+        var lblInventory = UILabel()
+        lblInventory.translatesAutoresizingMaskIntoConstraints = false
+        lblInventory.text = "Inventory:"
+        mainStackView.addArrangedSubview(lblInventory)
         let invTableView: UITableView = UITableView()
-        invTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        invTableView.register(InventoryItemCell.self, forCellReuseIdentifier: cellId)
         invTableView.delegate = self
         invTableView.dataSource = self
         mainStackView.addArrangedSubview(invTableView)
@@ -197,8 +205,15 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for:indexPath) as! InventoryItemCell
         let vendorInvKeys = vendorData?.inventory!.keys.sorted(by: <)
         let currentItem = itemsDummyData![vendorInvKeys![indexPath.row]]
+        print("Row: "+String(indexPath.row))
+        print("Vendor Inventory: ")
+        print(vendorData?.inventory)
+        print("Vendor Inv Keys: ")
+        print(vendorInvKeys)
+        print("Current Item: ")
+        print(currentItem)
         cell.item = currentItem
-        cell.itemCount = vendorData?.inventory![vendorInvKeys![indexPath.row]]
+        cell.itemCount = (vendorData?.inventory![vendorInvKeys![indexPath.row]])!
         return cell
     }
     

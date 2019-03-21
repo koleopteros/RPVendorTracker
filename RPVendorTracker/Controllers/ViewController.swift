@@ -94,8 +94,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListItem", for: indexPath)
-        print("Data-type check: \n\tCurrent Segment: \(segmentNames[currentSegment]) \n\tActual Segment: \(type(of:type(of:dataInterface[0])))")
-        print("Attempting to fill indexpath #\(indexPath.item)")
         cell.textLabel?.text = dataInterface[indexPath.item].getName()
         cell.detailTextLabel?.text = dataInterface[indexPath.item].getCellDetail()
         return cell
@@ -121,13 +119,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func fillDummyData(){
+        //Generating Dummy Data for Vendors
         vendorDummyData.append(Vendors(id:1,name:"Bob Ross",desc:"Master painter and artist",weight:121.5,race:"Human",age:900,gender:true))
-        vendorDummyData.append(Vendors(id:2,name:"Jack Daniels",desc:"Whiskey whiskey whiskey",weight:999.5,race:"Human",age:900,gender:true))
-        vendorDummyData.append(Vendors(id:3,name:"P Pawluk",desc:"super mobile and agile",weight:148.5,race:"Human",age:900,gender:true))
-        vendorDummyData.append(Vendors(id:4,name:"Mike D",desc:"Super edgy and full of stacks",weight:128.5,race:"Human",age:900,gender:true))
-        vendorDummyData.append(Vendors(id:5,name:"Mark K",desc:"Neuralmancy specialist",weight:110.8,race:"Human",age:900,gender:true))
-        vendorDummyData.append(Vendors(id:6,name:"V Bilijana",desc:"Data Storage specialist",weight:100.8,race:"Human",age:900,gender:false))
-        
+        vendorDummyData.append(Vendors(id:2,name:"Jack Daniels",desc:"Whiskey whiskey whiskey",weight:999.5,race:"Human",age:200,gender:true))
+        vendorDummyData.append(Vendors(id:3,name:"P Pawluk",desc:"super mobile and agile",weight:148.5,race:"Human",age:35,gender:true))
+        vendorDummyData.append(Vendors(id:4,name:"Mike D",desc:"Super edgy and full of stacks",weight:128.5,race:"Human",age:28,gender:true))
+        vendorDummyData.append(Vendors(id:5,name:"Mark K",desc:"Neuralmancy specialist",weight:110.8,race:"Human",age:31,gender:true))
+        vendorDummyData.append(Vendors(id:6,name:"V Bilijana",desc:"Data Storage specialist",weight:100.8,race:"Human",age:40,gender:false))
+        vendorDummyData.append(Vendors(id:6,name:"Anjana S",desc:"Hat and rock specialist",weight:87.8,race:"Human",age:40,gender:false))
+        vendorDummyData.append(Vendors(id:7,name:"Kareem A",desc:"Network, Security, and Survival specialist",weight:140.8,race:"Human",age:30,gender:true))
+
+             
+
+        // Generating Dummy data for Items
         itemsDummyData.append(Items(id:1,name:"Bottle of Water", desc:"water in a bottle", weight:1, rarity:1, category:1))
         itemsDummyData.append(Items(id:2,name:"Caltrops", desc:"Very spiky.  Don't touch!", weight:2, rarity:1, category:2))
         itemsDummyData.append(Items(id:3,name:"Mooing steak", desc:"I don't think its ready to eat...", weight:3, rarity:2, category:1))
@@ -135,9 +139,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         itemsDummyData.append(Items(id:5,name:"Short Sword", desc:"Its a sword that is short", weight:1.6, rarity:1, category:3))
         itemsDummyData.append(Items(id:6,name:"Throwing Knives", desc:"Comes in a 5-pack", weight:3, rarity:1, category:2))
         itemsDummyData.append(Items(id:7,name:"Make-up kit thing", desc:"For those who need that Foundation", weight:1, rarity:2, category:2))
+        itemsDummyData.append(Items(id:8,name:"Broken iPhone", desc:"Extremely expensive smartphone from some other world.  What's a smartphone you say?  Heck if I know.  Looks fancy and stuff.", weight:2, rarity:5, category:3))
+        itemsDummyData.append(Items(id:9,name:"Backpack", desc:"Its a bag.  It holds stuff.  I don't know what else to say...", weight:3, rarity:1, category:2))
+        itemsDummyData.append(Items(id:10,name:"Dark Spectacles", desc:"Ever wanted to block out the light? Well these spectacles are for you!  Wear them and deny the sun any place in your eyes.", weight:1, rarity:2, category:3))
+        itemsDummyData.append(Items(id:11,name:"Gummy Bears", desc:"gummy bears... very chewy and packed with very little sugar", weight:1, rarity:2, category:1))
         
+        // just taking slots 2-5 for "my vendors"
         for i in 2...5{
             myVendorsDummyData.append(vendorDummyData[i])
+        }
+
+        // assign random inventory to vendors.  Until Core Data is implemented, this data will constantly change.
+        for vendor in vendorDummyData{
+            for _ in 0...Int(arc4random_uniform(6)){
+                vendor.inventory![Int(arc4random_uniform(UInt32(itemsDummyData.count-1))+1)] = Int(arc4random_uniform(4))+1
+            }
         }
     }
 }

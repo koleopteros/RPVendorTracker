@@ -101,7 +101,7 @@
         <!--Add New Object-->
         <scene sceneID="oDZ-S7-oeG">
             <objects>
-                <viewController title="Add New Object" id="ZbF-6n-H2M" sceneMemberID="viewController">
+                <viewController title="Add New Object" id="ZbF-6n-H2M" customClass="AddObjViewController" customModule="RPVendorTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mQV-S0-CYA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -279,6 +279,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="N2u-Mk-SbQ"/>
+        <segue reference="HS9-zv-RL8"/>
     </inferredMetricsTieBreakers>
 </document>

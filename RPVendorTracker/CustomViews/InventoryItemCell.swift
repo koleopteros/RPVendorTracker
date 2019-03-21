@@ -20,8 +20,13 @@ class InventoryItemCell: UITableViewCell {
             itemNameLabel.text = item?.getName()
         }
     }
-    var itemCount: Int?
-    
+    var itemCount: Int? {
+        didSet {
+            if var quantityLabel = itemQuantityLabel as UILabel? {
+                itemQuantityLabel.text = String(itemCount as! Int!)
+            }
+        }
+    }
     
     private let itemNameLabel: UILabel = {
         let lbl = UILabel()
@@ -33,8 +38,9 @@ class InventoryItemCell: UITableViewCell {
     
     private let decreaseButton: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.setImage(#imageLiteral(resourceName: "minusTb"), for: .normal)
+        btn.setImage(#imageLiteral(resourceName: "icons8-minus-32"), for: .normal)
         btn.imageView?.contentMode = .scaleAspectFill
+        
         return btn
     }()
     
@@ -48,15 +54,16 @@ class InventoryItemCell: UITableViewCell {
     
     private let increaseButton: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.setImage(#imageLiteral(resourceName: "addTb"), for: .normal)
+        btn.setImage(#imageLiteral(resourceName: "icons8-plus-32"), for: .normal)
         btn.imageView?.contentMode = .scaleAspectFill
+        
         return btn
     }()
     
-    @objc func decreaseQuantity(){
+    @objc func decreaseQuantity(_ sender: UIButton){
         changeQuantity(by: -1)
     }
-    @objc func increaseQuantity(){
+    @objc func increaseQuantity(_ sender: UIButton){
         changeQuantity(by: 1)
     }
     
@@ -82,5 +89,34 @@ class InventoryItemCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?){
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        itemQuantityLabel.translatesAutoresizingMaskIntoConstraints = false
+        increaseButton.translatesAutoresizingMaskIntoConstraints = false
+        decreaseButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        let cellView = UIView(frame: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height))
+        
+        increaseButton.addTarget(self, action: #selector(InventoryItemCell.increaseQuantity), for: UIControlEvents.touchUpInside)
+        decreaseButton.addTarget(self, action: #selector(InventoryItemCell.decreaseQuantity), for: UIControlEvents.touchUpInside)
+        cellView.addSubview(itemNameLabel)
+        cellView.addSubview(increaseButton)
+        cellView.addSubview(itemQuantityLabel)
+        cellView.addSubview(decreaseButton)
+        
+        let decreaseConstraint = NSLayoutConstraint(item: decreaseButton, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: cellView, attribute: NSLayoutAttribute.trailing, multiplier: 1, constant: 10)
+        let quantityConstraint = NSLayoutConstraint(item: itemQuantityLabel, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: decreaseButton, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: -10)
+        let increaseConstraint = NSLayoutConstraint(item: increaseButton, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: itemQuantityLabel, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: -10)
+        let nameConstraint = NSLayoutConstraint(item: itemNameLabel, attribute: NSLayoutAttribute.leading, relatedBy: NSLayoutRelation.equal, toItem: cellView, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: 8)
+        NSLayoutConstraint.activate([decreaseConstraint,quantityConstraint,increaseConstraint,nameConstraint])
+        
+        contentView.addSubview(cellView)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
