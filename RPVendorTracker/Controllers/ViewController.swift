@@ -8,17 +8,36 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
     
 
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var ListView: UITableView!
+    
+    var newVendor: Vendors?{
+        didSet{
+            self.vendorDummyData.append(newVendor!)
+            if ListView != nil{
+                self.ListView.reloadData()
+            }
+        }
+    }
+    var newItem: Items? {
+        didSet{
+            self.itemsDummyData.append(newItem!)
+            if ListView != nil{
+                self.ListView.reloadData()
+            }
+        }
+    }
+    
     // Dummy data
     var vendorDummyData: [Vendors] = []
     var itemsDummyData: [Items] = []
     var myVendorsDummyData: [Vendors] = []
     var dataInterface: [ListInterface] = []
     
-    @IBOutlet weak var addButton: UIButton!
+    var pickerSelection: Vendors?
     
     var currentSegment: Int = 0
     
@@ -29,6 +48,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.fillDummyData()
         dataInterface = vendorDummyData
         super.viewDidLoad()
+        
+        addButton.titleLabel?.text = "Add Vendor"
+        addButton.addTarget(self, action: #selector(addButtonClicked(_:)), for: UIControlEvents.touchUpInside)
         
         //setting TableView's delegate and datasource
         ListView.delegate = self
@@ -46,6 +68,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         segmentCtrl.tintColor = UIColor.blue
         segmentCtrl.selectedSegmentIndex = 0
         self.view.addSubview(segmentCtrl)
+        
+        updateAddButton()
+    }
+    @IBAction func addButtonClicked(_ sender: UIButton) {
+        if currentSegment != 2{
+            self.performSegue(withIdentifier: "MainToNewObjSegue", sender: self)
+        } else {
+            print("Button Clicked, \(currentSegment)")
+            let alertCtrl = UIAlertController(title:"My Vendors", message:"Add an existing vendor to your list", preferredStyle: UIAlertControllerStyle.alert)
+            alertCtrl.view.addConstraint(NSLayoutConstraint(item: alertCtrl.view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.view.bounds.height*0.5))
+            // creating pickerviewer
+            let picker: UIPickerView = UIPickerView(frame: CGRect(x: 10, y: view.bounds.height*0.125, width: 250, height: 100))
+            picker.delegate = self
+            picker.dataSource = self
+            alertCtrl.view.addSubview(picker)
+            self.present(alertCtrl,animated: true,completion: nil)
+            let submitAction = UIAlertAction(title: "Submit", style: .default, handler: { (action) -> Void in
+                if self.pickerSelection != nil {
+                    self.myVendorsDummyData.append(self.pickerSelection!)
+                    print(self.myVendorsDummyData.count)
+                    //updating data in datainterface
+                    self.dataInterface = self.myVendorsDummyData
+                    self.ListView.reloadData()
+                }
+            })
+            let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {(action) -> Void in })
+            alertCtrl.addAction(submitAction)
+            alertCtrl.addAction(cancelAction)
+        }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if segue.identifier == "mainToDetails" {
@@ -57,7 +108,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         if segue.identifier == "MainToNewObjSegue" {
             let destVC = segue.destination as! FormViewController
-            destVC.mode = self.currentSegment
+            print("Segue to new Obj View")
+            destVC.dataType = self.currentSegment%2
+            destVC.vendorCount = self.vendorDummyData.count
+            destVC.itemCount = self.itemsDummyData.count
+            print("Sending dataType Value: \(self.currentSegment)")
         }
     }
     @objc func indexChanged(_ sender: UISegmentedControl){
@@ -111,10 +166,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func updateAddButton(){
-        if currentSegment == 2 {
-            addButton.titleLabel!.text = "Add New Item"
+        if currentSegment == 1 {
+            addButton.setTitle("Add Item", for: UIControlState.normal)
+        }else if currentSegment == 0{
+            addButton.setTitle("Add Vendor", for: UIControlState.normal)
+        }else {
+            addButton.setTitle("Add Vendor To List", for: UIControlState.normal)
+        }
+    }
+    
+    // PickerView methods
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return vendorDummyData.count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return vendorDummyData[row].getName()
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if myVendorsDummyData.contains(where: {$0 == vendorDummyData[row]}){
+            pickerSelection = nil
         }else{
-            addButton.titleLabel!.text = "Add New Vendor"
+            pickerSelection = vendorDummyData[row]
         }
     }
     

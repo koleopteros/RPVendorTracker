@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Vendors: ListInterface{
+class Vendors: ListInterface, Equatable{
     var id: Int = 0
     var name: String = ""
     var desc: String = ""
@@ -20,6 +20,9 @@ class Vendors: ListInterface{
     //imagefile currently unused
     var imageFile: String = ""
     init(){}
+    init(_ id:Int){
+        self.id = id
+    }
     init(id:Int,name:String,desc:String, weight:Float,race:String,age:Int,gender:Bool){
         self.id = id
         self.name=name
@@ -98,5 +101,8 @@ class Vendors: ListInterface{
         data["gender"] = self.gender
         data["inventory"] = self.inventory
         return data
+    }
+    static func == (lhs: Vendors, rhs: Vendors) -> Bool {
+        return lhs.id == rhs.id
     }
 }

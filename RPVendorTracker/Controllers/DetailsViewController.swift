@@ -190,7 +190,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     private func autolayoutInventoryView(){
 
-        var lblInventory = UILabel()
+        let lblInventory = UILabel()
         lblInventory.translatesAutoresizingMaskIntoConstraints = false
         lblInventory.text = "Inventory:"
         mainStackView.addArrangedSubview(lblInventory)

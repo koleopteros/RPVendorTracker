@@ -22,8 +22,8 @@ class InventoryItemCell: UITableViewCell {
     }
     var itemCount: Int? {
         didSet {
-            if var quantityLabel = itemQuantityLabel as UILabel? {
-                itemQuantityLabel.text = String(itemCount as! Int!)
+            if (itemQuantityLabel as UILabel?) != nil {
+                itemQuantityLabel.text = String(itemCount as Int!)
             }
         }
     }
