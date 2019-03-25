@@ -36,7 +36,6 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
     var txtViewDescription:UILabel = UILabel()
     
     // MARK: - View LifeCycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,11 +53,10 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         self.autolayoutMainStackView()
         self.autolayoutStackView()
         self.autolayoutTextViewDescription()
-        // Do any additional setup after loading the view.
+        // Include tableView only if we are adding a new Vendor
         if(dataType==0){
             self.autolayoutInventoryView()
         }
-        print(vendorData?.inventory)
     }
 
     override func didReceiveMemoryWarning() {
@@ -189,7 +187,6 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         txtViewDescription.translatesAutoresizingMaskIntoConstraints = false
     }
     private func autolayoutInventoryView(){
-
         let lblInventory = UILabel()
         lblInventory.translatesAutoresizingMaskIntoConstraints = false
         lblInventory.text = "Inventory:"
@@ -205,13 +202,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for:indexPath) as! InventoryItemCell
         let vendorInvKeys = vendorData?.inventory!.keys.sorted(by: <)
         let currentItem = itemsDummyData![vendorInvKeys![indexPath.row]]
-        print("Row: "+String(indexPath.row))
-        print("Vendor Inventory: ")
-        print(vendorData?.inventory)
-        print("Vendor Inv Keys: ")
-        print(vendorInvKeys)
-        print("Current Item: ")
-        print(currentItem)
+        
         cell.item = currentItem
         cell.itemCount = (vendorData?.inventory![vendorInvKeys![indexPath.row]])!
         return cell

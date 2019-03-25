@@ -10,23 +10,26 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
     
-
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var ListView: UITableView!
     
     var newVendor: Vendors?{
         didSet{
-            self.vendorDummyData.append(newVendor!)
-            if ListView != nil{
-                self.ListView.reloadData()
+            if newVendor != nil {
+                self.vendorDummyData.append(newVendor!)
+                if ListView != nil{
+                    self.ListView.reloadData()
+                }
             }
         }
     }
     var newItem: Items? {
         didSet{
-            self.itemsDummyData.append(newItem!)
-            if ListView != nil{
-                self.ListView.reloadData()
+            if newItem != nil {
+                self.itemsDummyData.append(newItem!)
+                if ListView != nil{
+                    self.ListView.reloadData()
+                }
             }
         }
     }
@@ -38,9 +41,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var dataInterface: [ListInterface] = []
     
     var pickerSelection: Vendors?
-    
+
     var currentSegment: Int = 0
-    
     let segmentNames = ["Vendors","Items","My Vendors"]
     
     override func viewDidLoad() {
@@ -204,8 +206,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         vendorDummyData.append(Vendors(id:6,name:"V Bilijana",desc:"Data Storage specialist",weight:100.8,race:"Human",age:40,gender:false))
         vendorDummyData.append(Vendors(id:6,name:"Anjana S",desc:"Hat and rock specialist",weight:87.8,race:"Human",age:40,gender:false))
         vendorDummyData.append(Vendors(id:7,name:"Kareem A",desc:"Network, Security, and Survival specialist",weight:140.8,race:"Human",age:30,gender:true))
-
-             
 
         // Generating Dummy data for Items
         itemsDummyData.append(Items(id:1,name:"Bottle of Water", desc:"water in a bottle", weight:1, rarity:1, category:1))

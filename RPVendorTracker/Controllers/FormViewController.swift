@@ -18,7 +18,6 @@ class FormViewController: UIViewController{
     var itemCount:Int?
     
     var mainStack: UIStackView = UIStackView()
-    
     var topStack: UIStackView = UIStackView()
     var labelStack: UIStackView = UIStackView()
     var valueStack: UIStackView = UIStackView()
@@ -39,13 +38,9 @@ class FormViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(self.dataType)
-        
         // this'll just run all those autolayoutsfunctions
         runErrThang()
         // Do any additional setup after loading the view.
-        
         btnSubmit.addTarget(self, action: #selector(submitClicked(_:)), for: UIControlEvents.touchUpInside)
     }
     
