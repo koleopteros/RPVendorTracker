@@ -13,7 +13,6 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
     let HEIGHT = CGFloat(30.0)
     let CATEGORIES = ["Food","Tools","Weapons","Junk"]
 
-    // for ReusableTableCell
     var cellId = "itemCell"
     
     // Vars for Passed Data
