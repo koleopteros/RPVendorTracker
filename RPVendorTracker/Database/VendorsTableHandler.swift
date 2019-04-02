@@ -12,10 +12,11 @@ import SQLite3
 class VendorsTableHandler{
     var db: OpaquePointer?
     
+    let handler = DatabaseHandler()
+    let invHandler = InventoryTableHandler()
+    
     public func createVendorsTable(){
         let createString = "CREATE TABLE IF NOT EXISTS vendors (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, desc TEXT, weight REAL, race TEXT, age INTEGER, gender INTEGER, inventoryID INTEGER, FOREIGN KEY (inventoryID) REFERENCES inventories(id))"
-        
-        let handler = DatabaseHandler()
         
         if sqlite3_open(handler.fileURL.path, &db) != SQLITE_OK {
             print("failed to open db")
