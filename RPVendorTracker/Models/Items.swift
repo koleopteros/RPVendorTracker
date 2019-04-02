@@ -9,6 +9,7 @@
 import Foundation
 
 class Items: ListInterface {
+    let CATEGORIES = ["Food","Tools","Weapons","Junk"]
     var id: Int = 0
     var name: String = ""
     var desc: String = ""
@@ -50,6 +51,9 @@ class Items: ListInterface {
     }
     func getWeight() -> Float {
         return self.weight
+    }
+    func getCategories() -> [String] {
+        return self.CATEGORIES
     }
     func getCellDetail() -> String {
         return String(self.weight)

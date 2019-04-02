@@ -26,7 +26,7 @@ class FormViewController: UIViewController{
     //me being lazy
     var vendorAttributes: [String] = ["Age","Gender","Race"]
     var itemAttributes: [String] = ["Category","Rarity"]
-    let CATEGORIES = ["Food","Tools","Weapons","Junk"]
+    let CATEGORIES:[String] = Items().getCategories()
     
     // me regretting being lazy
     var txt: [UITextField] = [UITextField]()

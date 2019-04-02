@@ -11,7 +11,7 @@ import UIKit
 class DetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     let WIDTH = CGFloat(200.0)
     let HEIGHT = CGFloat(30.0)
-    let CATEGORIES = ["Food","Tools","Weapons","Junk"]
+    let CATEGORIES:[String] = Items().getCategories()
 
     var cellId = "itemCell"
     

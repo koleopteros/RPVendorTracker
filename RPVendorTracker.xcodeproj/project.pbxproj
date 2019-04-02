@@ -25,8 +25,9 @@
 		E87D837B2253E8DB009F58A1 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D837A2253E8DB009F58A1 /* Users.swift */; };
 		E87D83BC22541808009F58A1 /* DatabaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D83BB22541808009F58A1 /* DatabaseHandler.swift */; };
 		E87D83C022541837009F58A1 /* VendorsTableHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D83BF22541837009F58A1 /* VendorsTableHandler.swift */; };
-		E87D83C222541843009F58A1 /* InventoryTableHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D83C122541843009F58A1 /* InventoryTableHandler.swift */; };
 		E87D83C422541851009F58A1 /* ItemsTableHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D83C322541851009F58A1 /* ItemsTableHandler.swift */; };
+		E87D83C62254228C009F58A1 /* Inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D83C52254228C009F58A1 /* Inventory.swift */; };
+		E87D83C8225424A9009F58A1 /* InventoryTableHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D83C7225424A9009F58A1 /* InventoryTableHandler.swift */; };
 		E8EA3DA5223C07E000C55FCA /* CustomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EA3DA4223C07E000C55FCA /* CustomListCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,8 +73,9 @@
 		E87D837A2253E8DB009F58A1 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		E87D83BB22541808009F58A1 /* DatabaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHandler.swift; sourceTree = "<group>"; };
 		E87D83BF22541837009F58A1 /* VendorsTableHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorsTableHandler.swift; sourceTree = "<group>"; };
-		E87D83C122541843009F58A1 /* InventoryTableHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryTableHandler.swift; sourceTree = "<group>"; };
 		E87D83C322541851009F58A1 /* ItemsTableHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTableHandler.swift; sourceTree = "<group>"; };
+		E87D83C52254228C009F58A1 /* Inventory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inventory.swift; sourceTree = "<group>"; };
+		E87D83C7225424A9009F58A1 /* InventoryTableHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryTableHandler.swift; sourceTree = "<group>"; };
 		E8EA3DA4223C07E000C55FCA /* CustomListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +111,7 @@
 				E81475D9223C160D0031C38A /* Items.swift */,
 				E81475D6223C15EF0031C38A /* Vendors.swift */,
 				E87D837A2253E8DB009F58A1 /* Users.swift */,
+				E87D83C52254228C009F58A1 /* Inventory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -182,8 +185,8 @@
 			children = (
 				E87D83BB22541808009F58A1 /* DatabaseHandler.swift */,
 				E87D83BF22541837009F58A1 /* VendorsTableHandler.swift */,
-				E87D83C122541843009F58A1 /* InventoryTableHandler.swift */,
 				E87D83C322541851009F58A1 /* ItemsTableHandler.swift */,
+				E87D83C7225424A9009F58A1 /* InventoryTableHandler.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -334,11 +337,12 @@
 				E81475E3223C628F0031C38A /* UIStackView.swift in Sources */,
 				E81475E1223C3EE90031C38A /* DetailsViewController.swift in Sources */,
 				E87D83C022541837009F58A1 /* VendorsTableHandler.swift in Sources */,
+				E87D83C8225424A9009F58A1 /* InventoryTableHandler.swift in Sources */,
 				E81475D7223C15EF0031C38A /* Vendors.swift in Sources */,
 				E87D837B2253E8DB009F58A1 /* Users.swift in Sources */,
 				E85042BF223BFCEE004C27BF /* LoginViewController.swift in Sources */,
-				E87D83C222541843009F58A1 /* InventoryTableHandler.swift in Sources */,
 				E80C68602242F5F7000871F0 /* InventoryItemCell.swift in Sources */,
+				E87D83C62254228C009F58A1 /* Inventory.swift in Sources */,
 				E8504293223BFC30004C27BF /* ViewController.swift in Sources */,
 				E87D83C422541851009F58A1 /* ItemsTableHandler.swift in Sources */,
 				E8EA3DA5223C07E000C55FCA /* CustomListCell.swift in Sources */,

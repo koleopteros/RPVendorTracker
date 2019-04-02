@@ -30,7 +30,7 @@ class Vendors: ListInterface, Equatable{
         self.weight=weight
         self.race=race
         self.age=age
-        self.gender=true
+        self.gender=gender
         inventory = [:]
     }
     init(id:Int,name:String,desc:String, weight:Float,race:String,age:Int,inventory: [Int:Int]?){
@@ -41,6 +41,16 @@ class Vendors: ListInterface, Equatable{
         self.race=race
         self.age=age
         self.gender=true
+        self.inventory=inventory
+    }
+    init(id:Int,name:String,desc:String, weight:Float,race:String,age:Int,gender:Bool,inventory: [Int:Int]?){
+        self.id = id
+        self.name=name
+        self.desc=desc
+        self.weight=weight
+        self.race=race
+        self.age=age
+        self.gender=gender
         self.inventory=inventory
     }
     init(obj: [String:Any]){
