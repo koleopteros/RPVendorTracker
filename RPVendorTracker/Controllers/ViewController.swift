@@ -62,9 +62,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let segmentCtrl = UISegmentedControl(items:segmentNames)
         segmentCtrl.frame = CGRect(
             x:0,
-            y:20,
+            y:30,
             width:self.view.frame.width,
-            height:30)
+            height:40)
         segmentCtrl.addTarget(self,action:
             #selector(ViewController.indexChanged(_:)), for:.valueChanged)
         segmentCtrl.tintColor = UIColor.blue
