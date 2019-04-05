@@ -1,8 +1,12 @@
-//
+//  Student ID: 100530184
 //  VendorsTableHandler.swift
 //  RPVendorTracker
 //
-//  Created by Jerome Ching on 2019-04-02.
+//  Due to time constraints...
+//  Vendors will only have Create, and Read operations
+//  Inventory can still be updated via the inventory handler.
+//
+//  Created by Jerome Ching.
 //  Copyright © 2019 Jerome Ching. All rights reserved.
 //
 
@@ -26,8 +30,32 @@ class VendorsTableHandler{
             print("error creating table: \(errmsg)")
         }
     }
-    
-    public func retrieveAll() -> [Vendors] {
+    /** insertVendor
+        inserts new row with vendor's information
+        Returns true for success
+        @params Vendor Object
+        @returns Bool
+    */
+    public func insertVendor(v:Vendors)->Bool{
+        let query = "INSERT INTO vendors (name,desc,weight,race,age,gender) VALUES (\(v.name),\(v.desc),\(v.weight),\(v.race),\(v.age),\(v.gender?1:0))"
+
+        if sqlite3_prepare_v2(db,query,-1,&stmt,nil) == SQLITE_OK{
+            if sqlite3_step(stmt) == SQLITE_DONE {
+                print("Inserted Vendor row")
+                return true
+            } else {
+                print("Failed to insert row: \(String(cString: sqlite3_errmsg(db)))")
+            }
+        } else {
+            print("Failed to prep statement: \(String(cString: sqlite3_errmsg(db)))")
+        }
+        return false
+    }
+    /** retrieveVendors
+        gets full list of all existing vendors
+        @returns [Vendors]
+    */
+    public func retrieveVendors() -> [Vendors] {
         let query = "SELECT * FROM vendors"
         var stmt: OpaquePointer?
         var list: [Vendors] = [Vendors]()
@@ -45,7 +73,7 @@ class VendorsTableHandler{
             let race = String(cString: sqlite3_column_text(stmt, 4))
             let age = Int(sqlite3_column_int(stmt, 5))
             let gender = Bool(sqlite3_column_int(stmt, 6) == 1 ? true : false)
-            let inventory = [Int:Int]()
+            let inventory = invHandler.retrieveInventory(id)
             
             
             list.append(Vendors(id: id, name: name, desc: desc, weight: weight, race: race, age: age, gender: gender, inventory: inventory))
