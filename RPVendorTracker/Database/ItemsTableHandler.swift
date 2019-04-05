@@ -1,8 +1,8 @@
-//
+//  Student ID: 100530184
 //  ItemsTableHandler.swift
 //  RPVendorTracker
 //
-//  Created by Jerome Ching on 2019-04-02.
+//  Created by Jerome Ching.
 //  Copyright © 2019 Jerome Ching. All rights reserved.
 //
 
@@ -25,8 +25,33 @@ class ItemsTableHandler{
             print("error creating table: \(errmsg)")
         }
     }
-    
-    public func retrieveAll() -> [Items] {
+    /** insertitems
+        inserts a new row into items
+        returns true on success
+        @params Items object
+        @returns Bool
+    */
+    public func insertItems(i:Items){
+        let query = "INSERT INTO items (name,desc,weight,rarity,category) VALUES (\(i.name),\(i.desc),\(i.weight),\(i.rarity),\(i.category))"
+
+        if sqlite3_prepare_v2(db,query,-1,&stmt,nil) == SQLITE_OK {
+            if sqlite3_step(stmt) == SQLITE_DONE {
+                print("Inserted Item row")
+                return true
+            } else {
+                print("Failed to insert item:  \(String(cString: sqlite3_errmsg(db)))")
+            }
+        } else {
+            print("Failed to prep:  \(String(cString: sqlite3_errmsg(db)))")
+        }
+        return false
+    }
+
+    /** retrieveItems
+        returns a list of all existing items
+        @returns [Items]
+    */
+    public func retrieveItems() -> [Items] {
         let query = "SELECT * FROM vendors"
         var stmt: OpaquePointer?
         var list: [Items] = [Items]()
