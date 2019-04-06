@@ -228,6 +228,7 @@ class LoginViewController: UIViewController {
             return false
         }
         else if user.password == password {
+            UserDefaults.standard.set(user.id,forKey:"userID")
             return true
         }
         return false
@@ -235,8 +236,16 @@ class LoginViewController: UIViewController {
     
     // loads... db... its in the name.
     private func loadDB(){
-        //SQL Scripts
-        let createUserTable = "CREATE TABLE IF NOT EXISTS users (id integer primary key autoincrement, name text unique, password text)"
+        //SQL Scripts - Primary tables
+        var sqlscripts = [String]()
+        sqlscripts.append("CREATE TABLE IF NOT EXISTS users (id integer primary key autoincrement, name text unique, password text)")
+        sqlscripts.append("CREATE TABLE IF NOT EXISTS vendors (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, desc TEXT, weight REAL, race TEXT, age INTEGER, gender INTEGER)")
+        sqlscripts.append("CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, desc TEXT, weight REAL, rarity INTEGER, category INTEGER)")
+        
+        //SQL Scripts Associative Tables
+        sqlscripts.append("CREATE TABLE IF NOT EXISTS users_vendors (users_id INTEGER REFERENCES users(id), vendors_id INTEGER REFERENCES vendors(id), PRIMARY KEY (users_id, vendors_id))")
+        sqlscripts.append("CREATE TABLE IF NOT EXISTS inventory (vendors_id INTEGER REFERENCES vendors(id), items_id INTEGER REFERENCES items(id), quantity INTEGER, PRIMARY KEY (vendors_id, items_id))")
+        
         //Create DB if not exist
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             .appendingPathComponent("appDB.sqlite")
@@ -246,9 +255,12 @@ class LoginViewController: UIViewController {
             print("error opening db")
         }
         //Create Tables
-        if sqlite3_exec(db, createUserTable, nil, nil, nil) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error creating table: \(errmsg)")
+        for query in sqlscripts{
+            if sqlite3_exec(db, query, nil, nil, nil) == SQLITE_OK {
+                print("QUERY:\n================\n\(query)\n=====SUCCESSFUL======")
+            } else {
+                print("error creating table: \(String(cString: sqlite3_errmsg(db)!))")
+            }
         }
         //load up userList array
         storeAllUsers()

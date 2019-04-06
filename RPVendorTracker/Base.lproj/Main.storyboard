@@ -149,11 +149,17 @@
                                     <segue destination="VG4-WF-bxe" kind="show" id="N2u-Mk-SbQ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TsR-gJ-3aL">
+                                <rect key="frame" x="229" y="617" width="130" height="30"/>
+                                <state key="normal" title="Add New Inventory"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="xUf-wd-naz" firstAttribute="leading" secondItem="AJ2-Zf-tEC" secondAttribute="leading" constant="16" id="H0g-jV-uTe"/>
+                            <constraint firstItem="AJ2-Zf-tEC" firstAttribute="bottom" secondItem="TsR-gJ-3aL" secondAttribute="bottom" constant="20" id="exv-SC-Kxf"/>
                             <constraint firstItem="AJ2-Zf-tEC" firstAttribute="bottom" secondItem="xUf-wd-naz" secondAttribute="bottom" constant="20" id="g7L-CH-74k"/>
+                            <constraint firstItem="AJ2-Zf-tEC" firstAttribute="trailing" secondItem="TsR-gJ-3aL" secondAttribute="trailing" constant="16" id="w5R-l6-Z6N"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="AJ2-Zf-tEC"/>
                     </view>

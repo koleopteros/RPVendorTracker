@@ -20,10 +20,10 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
     var dataStandard: [ListInterface] = [Vendors(), Items()]
     
     var vendorData: Vendors?
-    var itemsData: Items?
+    var itemData: Items?
     var dataType = -1
     // No DB implementation yet, so just going to transfer this list of 'existing' items
-    var itemsDummyData: [Items]?
+    var itemsDBData: [Items]?
     
     var mainStackView: UIStackView = UIStackView()
     var innerStackView: UIStackView = UIStackView()
@@ -42,7 +42,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
             //test for Vendor type
             if type(of:dataInterface) != type(of:dataStandard[0]){
                 dataType = 1
-                itemsData = Items(obj: dataInterface.dataDump())
+                itemData = Items(obj: dataInterface.dataDump())
             } else {
                 dataType = 0
                 vendorData = Vendors(obj: dataInterface.dataDump())
@@ -153,11 +153,11 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         } else {
             let txtRarity = UILabel()
             txtRarity.translatesAutoresizingMaskIntoConstraints = false
-            txtRarity.text = String(itemsData!.rarity)+"*"
+            txtRarity.text = String(itemData!.rarity)+"*"
             innerMidStack.addArrangedSubview(txtRarity)
             let txtCate = UILabel()
             txtCate.translatesAutoresizingMaskIntoConstraints = false
-            txtCate.text = CATEGORIES[(itemsData?.category)!]
+            txtCate.text = CATEGORIES[(itemData?.category)!]
             innerMidStack.addArrangedSubview(txtCate)
         }
         let txtWeight = UILabel()
@@ -200,7 +200,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for:indexPath) as! InventoryItemCell
         let vendorInvKeys = vendorData?.inventory!.keys.sorted(by: <)
-        let currentItem = itemsDummyData![vendorInvKeys![indexPath.row]]
+        let currentItem = itemsDBData![vendorInvKeys![indexPath.row]]
         
         cell.item = currentItem
         cell.itemCount = (vendorData?.inventory![vendorInvKeys![indexPath.row]])!
