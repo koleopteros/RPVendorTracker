@@ -8,7 +8,10 @@
 
 import UIKit
 
-class DetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class DetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
+    
+    
+    
     let WIDTH = CGFloat(200.0)
     let HEIGHT = CGFloat(30.0)
     let CATEGORIES:[String] = Items().getCategories()
@@ -24,6 +27,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
     var dataType = -1
     // No DB implementation yet, so just going to transfer this list of 'existing' items
     var itemsDBData: [Items]?
+    var pickerSelection: Items?
     
     var mainStackView: UIStackView = UIStackView()
     var innerStackView: UIStackView = UIStackView()
@@ -55,6 +59,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         // Include tableView only if we are adding a new Vendor
         if(dataType==0){
             self.autolayoutInventoryView()
+            self.bottomBarButton()
         }
     }
 
@@ -71,6 +76,37 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         // Pass the selected object to the new view controller.
     }
     */
+    private func bottomBarButton(){
+        var button = UIButton(frame: CGRect.init(x: UIScreen.main.bounds.width - 120, y: UIScreen.main.bounds.height - 60, width: 100, height: 40))
+        button.setTitle("Add New Inventory", for: UIControlState.normal)
+        button.showsTouchWhenHighlighted = true
+        button.addTarget(self, action: #selector(DetailsViewController.pickerAlert), for: UIControlEvents.touchUpInside)
+        self.view.addSubview(button)
+    }
+    /*----- Alert for inventory picker -----*/
+    @IBAction func pickerAlert(){
+        showPickerAlert(title:"SELECT ITEM", msg:"Pick an item to add\nto this vendor's inventory!")
+    }
+    private func showPickerAlert(title: String, msg:String){
+        let alert = UIAlertController(title:title, message:msg, preferredStyle: UIAlertControllerStyle.actionSheet)
+        alert.isModalInPopover = true
+        
+        let pickerFrame = UIPickerView(frame: CGRect(x: 5, y: 20, width: UIScreen.main.bounds.width - 30, height: 140))
+        pickerFrame.tag = 555
+        pickerFrame.delegate = self
+        pickerFrame.dataSource = self
+        
+        alert.view.addSubview(pickerFrame)
+        alert.addAction(UIAlertAction(title: "Add!", style: .default, handler: {
+            (action) -> Void in
+            if self.pickerSelection != nil {
+                
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Nevermind!", style: UIAlertActionStyle.cancel, handler:nil))
+        self.present(alert, animated:true, completion:nil)
+    }
+    /*------ AutoLayouts ------*/
     private func autolayoutMainStackView(){
         view.addSubview(mainStackView)
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -216,4 +252,22 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         mainStackView.changeBackgroundColor(color: UIColor(red: 244/255, green: 204/255, blue: 195/255, alpha: 1.0))
         innerStackView.changeBackgroundColor(color: UIColor(red: 191/255, green: 235/255, blue: 242/255, alpha: 1.0))
     }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return itemsDBData!.count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return itemsDBData![row].getName()
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let vendorInvKeys = vendorData?.inventory!.keys.sorted(by: <)
+        if (vendorInvKeys?.contains(where: {$0 == itemsDBData![row].id}))!{
+            pickerSelection = nil
+        }else{
+            pickerSelection = itemsDBData?[row]
+        }
+    }
+    
 }
